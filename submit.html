@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Submitting your lab solution</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <style>
+  <!--
+  html,body {margin-left:3%;margin-right:auto;margin-top:1%;background-color:#F8E8F8;}
+  p {max-width: 870px;}
+  a {color:#000000;}
+  pre,code,kbd,samp,tt,.email {font-family:'Source Code Pro','DejaVu Sans Mono','Courier New',courier,monospace;}
+  html,body,p,dl,dt,dd,li,ul,.highlight {font-family:'Source Serif Pro','Georgia','Times New Roman','DejaVu Serif',Times,serif;}
+  h1 {font-family:'Source Sans Pro','Verdana','Arial',sans-serif;font-size:30pt;line-height:1.1em;font-weight:600;}
+  h2 {font-family:'Source Sans Pro','Verdana','Arial',sans-serif;font-size:26pt;line-height:1.1em;font-weight:600;}
+  h3 {font-family:'Source Sans Pro','Verdana','Arial',sans-serif;font-size:20pt;line-height:1.1em;font-weight:600;}
+  p,dl,dt,dd,li,ul,.highlight {font-size:13pt;line-height:1.5em;}
+  pre,code,kbd,samp,tt {font-size:13pt;line-height:1.1em;}
+  .footnote {font-size:12pt;text-align:center;}
+  .pubtitle {font-size:14pt;color:#330000;font-weight:600;}
+  .myname {color:#540000;}
+  .addendum {font-size:10pt;}
+  dt {color:#444444;font-size:10pt;}
+  #introcontent { width:55%;z-index:5; }
+  #content { width:90%;z-index:5; }
+  #rightcol { width:40%;overflow:visible;position:absolute;right:1%;z-index:1; }
+  #rightimg { max-width:100%;height:auto;float:right;margin-right:0px;border-radius:15px; }
+  #footer { bottom:5%;font-size:12pt;z-index:2; }
+  -->
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Submitting your lab solution</h1>
+</header>
+<p>To submit your lab solution, you will create an archive of your git history, scp it to rice.stanford.edu, and run a submit script.</p>
+<p>You are welcome to submit your solution as many times as you want; we will only grade the latest submission (but please make sure you understand how this will interact with the late homework policy!).</p>
+<p><strong>Note:</strong> We say <code>&lt;labnum&gt;</code> when we mean an integer in 0..8 corresponding to the lab exercise you’re submitting. For example, in the first step below, for lab zero you will create the file <code>lab0.git</code>. Similarly, <code>&lt;MySUNetID&gt;</code> means your SUNet login.</p>
+<ol type="1">
+<li><p>From the git working directory on your VM, use the following command to archive your git repository:</p>
+<pre><code> git bundle create /tmp/lab&lt;labnum&gt;.git --all</code></pre>
+<p><strong>Important:</strong> this command will create an archive of your git history, which means that your solution <em>must</em> be committed to your git repository! In addition, we will be grading only the <strong>master branch</strong> of your repository, so please be sure that branch corresponds to the solution you want to turn in.</p></li>
+<li><p>Next, use scp to transfer it to rice.stanford.edu:</p>
+<pre><code> scp /tmp/lab&lt;labnum&gt;.git &lt;MySUNetID&gt;@rice.stanford.edu:</code></pre>
+<p><strong>Important</strong>: don’t forget the final colon in the second argument to scp!</p></li>
+<li><p>Connect to rice and run the submit script:</p>
+<pre><code> ssh &lt;MySUNetID&gt;@rice.stanford.edu
+ /afs/ir.stanford.edu/class/cs144/bin/submit.sh &lt;labnum&gt;</code></pre></li>
+</ol>
+<p>You will get a message indicating success:</p>
+<pre><code>Successfully submitted lab&lt;labnum&gt;.git as your solution to lab &lt;labnum&gt;.</code></pre>
+<p><strong>Note:</strong> If you do not see this message, your homework has not been submitted! Double check the above steps, and contact the course staff if the issue persists.</p>
+</body>
+</html>

@@ -1,0 +1,1 @@
+../smartquotesjs/dist/smartquotes.js
