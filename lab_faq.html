@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CS 144: Lab FAQ">
+    <title>CS 144: Lab FAQs</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="stanford.png">
+  </head>
+
+  <body>
+    <div class="container" role="main">
+      <div class="page-header">
+        <h3>Lab FAQs</h3>
+      </div>
+
+      <h4>General</h4>
+      <ol>
+        <li><b>How will implementation soundness and style be graded?</b>
+        <p>Here are some guidelines:
+<ul><li>Complex pieces of code should be documented in comments so that they become easier for the reader to understand&mdash;but don't overdo it with comments for trivial things.
+<li>Common, general-purpose functionality should be decomposed into helper functions to avoid repeated code&mdash;don't overdo this either, e.g. by making it difficult to understand the flow of execution.
+<li>Code should use consistent naming conventions and not contain commented-out code or vestiges of debugging.
+
+<li>Please check the return values of all functions in which an error could occur, and handle these errors gracefully. Throwing an exception is one graceful way
+to handle an unrecoverable error.
+
+<li>Avoid memory errors and leaks, egregious performance issues (e.g. allocating large amounts of memory for no reason) or unnecessarily complex approaches (e.g. a complicated data structure that is only marginally more efficient than something much simpler, or something available in the C++ standard library).
+
+<li>In the writeup, we really want to see that you have judiciously considered
+  the available implementation strategies (e.g., choice of data structures) and
+  can justify the choice you made.
+  
+<li>Before submitting each assignment, please run <code>cmake --build build --target format</code> (to standardize the formatting), and make sure to remove any dummy code or comments that were included with the starter code.
+
+<li>Also (optionally) run <code>cmake --build build --target tidy</code> to receive suggestions for improvements related to C++ programming practices.
+</ul>
+
+Your style grade may also include components of functionality not covered by the tests.
+<p>
+        <li><b>How do I run an individual test?</b></li>
+        <p><code>ctest -R '^test_name$'</code></p>
+
+        <li><b>Can I add include lines in the header files?</b></li>
+        <p>Sure, but please don't change the public interface of any
+	of the classes.</p>
+
+        <li><b>How do I use <code>git</code>?</b></li>
+
+	<p>Here are some links to <a href="https://try.github.io/">resources to learn Git</a>.
+
+        <p><b>Brief summary:</b> Git commits store a snapshot of the current state of your code. For instance, say you break a feature that you know used to work, but aren't sure which code caused it to break. If you made a commit after getting that feature working, you can checkout that commit to see what things looked like in the good old days when it worked. So, make a commit every time you get something working! To make a commit:<br>
+        First, git add the files you've changed - you must add before every commit. e.g. <code>git add ./src/byte_stream.*</code><br>
+        Then, commit with a message describing the state of the code. e.g. <code>git commit -m "All tests pass except many_writes times out."</code><br>
+        You can see which files you modified by running <code>git status</code>. To really understand the state of a Git repository, the command-line <code>tig</code> tool, or the graphical <code>gitk</code> tool, can be very helpful.<br>
+        A handy shortcut to commit all modified files is <code>git commit -am "[message]"</code>.<br>
+        <p><b>Reality check:</b> If you want to verify that you have submitted exactly the files you intended to, you may find the following useful.<br>
+        First, once you've committed, run <code>git status</code>. You should see a message saying <code>nothing to commit, working tree clean</code>. If you have uncommitted changes, you'll see this instead: <code>Changes not staged for commit:</code>.
+        <br>
+        Second, after you've copied your git bundle to rice, and logged into rice:
+        <ol>
+          <li>Run <code>$ git clone [bundle name] [unbundled name]</code>.</li>
+          <li><code>cd</code> into the unbundled directory.</li>
+          <li>Run <code>$ git log</code> and verify that you see the commits you expect to.
+          <li>Copy the commit hash of the starter code commit.</li>
+          <li>Run <code>$ git diff [hash]</code> to make sure they see all changes you want to submit.</li>
+        </ol></p>
+
+        <li><b>How do I debug?</b></li>
+        <p><code>gdb</code> is a great tool for debugging the labs! Check out the <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/resources/gdb">CS107 guide</a> if you need a refresher.<br>
+
+        To use <code>gdb</code> to debug a test:
+        <ol>
+          <li>Install <code>gdb</code> (on the VM, <code>sudo apt-get install gdb</code>).</li>
+          <li>Start <code>gdb</code> on the executable corresponding to the test you want to debug (from the <code>build</code> directory, <code>ls tests</code> to see the executables). e.g. from the build directory: <code>gdb tests/byte_stream_one_write</code>.</li>
+          <li>The output of the test failure will show you the part of the test that failed. To set a breakpoint at that part of the test, break on the line in the test file where the test harness for that part is created. The test source code is in <code>minnow/tests</code> (not <code>minnow/build/tests</code>). e.g. if you're failing the <code>write-pop2-end</code> test in <code>byte_stream_one_write</code>, <code>break 83</code> (i.e. where the <code>write-pop2-end</code> test harness is created).</li>
+          <li>You can set breakpoints on your functions using the function names, as usual.</li>
+        </ol>
+
+        Other notes:
+        <ul>
+          <li>We don't recommend modifying any files in the <code>util</code> directory, since messing up the support library will make debugging difficult.</li>
+          <li>If a test is timing out, but you want to check if it passes without the timeout, run the test executable individually, which won't enforce the timeout. e.g. from the build directory: <code>./tests/byte_stream_one_write</code>.</li>
+          <li><code>gdb</code> may help debug timeouts. While running the test in <code>gdb</code>, if it appears to hang (meaning it may be executing a slow portion of code), ctrl-C and backtrace to pause and see which code was executing.</li>
+        </ul></p>
+      </ol>
+
+ <h4>Lab 0</h4>
+      <ol>
+        <li><b>What should the behaviour of my program be if the caller tries to pop with a <code>len</code> greater than what is available?</b></li>
+        We don't have any preference on the behavior if the caller tries to pop more than is buffered in the stream, as long as you behave reasonably and don't crash in that situation. If you want to pop the maximum available, that is fine with us. If you want to throw an exception, that is also fine with us.
+
+	<li><b>How fast should my code be?</b></li>
+
+	  Here's a reasonable rule: if any of your tests are
+	  taking longer than 2 seconds, it's probably good to keep
+	exploring other ways of representing the ByteStream.
+	And if your benchmark results at the end of the test are worse
+	than 0.1 Gbit/s (100 million bits per second), that's another
+	sign the design may need to be rethought.
+	This lab doesn't require any sophisticated data structures,
+	but it might still take some trial-and-error to find a
+	reasonable approach. Sometimes "big-O" analysis can be
+	misleading about the performance of real programs&mdash;the
+	constant factors can matter a lot!
+	<p>
+      </ol>
+
+
+      
+      <!--
+      <h4>Lab 1</h4>
+      <ol>
+        <li><b>Which bytes should be accepted in a <code>push_substring</code> call?</b></li>
+        Those whose index is within <code>capacity</code> indices of the first unread byte in the re-assembled stream.
+        Pictorally:
+        <image src="images/reassembler.png" />
+        <li><b>Is it okay for our re-assembly data structure to store overlapping substrings?</b></li>
+        It's possible to implement an interface-correct reassembler which stores overlapping substrings.
+        However, allowing the re-assembler to do this undermines the notion of <code>capacity</code> as a memory limit, so we'll consider the storage of overlapping substrings to be a style violation when grading.
+      </ol>
+
+      <h4>Lab 2</h4>
+      <ol>
+        <li><b>Can we use <code>static_cast</code> in functions for <code>WrappingInt32</code>?</b></li>
+        Yes, these kinds of functions (those that explicitly convert between
+        numeric types) present exactly the kind of situation in which
+        <code>static_cast</code> is appropriate. Note also that
+        you don't
+	<em>need</em> to use <code>static_cast</code> if you don't
+	want to&mdash;you can
+	explicitly construct a WrappingInt32 with syntax
+	like <code>WrappingInt32{x}</code>.<p>
+
+	<li><b>Should <code>TCPReceiver::segment_received()</code> return
+	  true if <em>any</em> part of the segment is inside the window,
+	  even if both the beginning and end of the segment are outside
+	  the window?</b></li>
+
+	Good question&mdash;please
+	see <a href="https://piazza.com/class/k0u7fdam6082kb?cid=136">our
+	Piazza note</a> where we clarify this. The short answer is
+	that we've deleted a test in the lab2 starter code in order to
+	make both answers to this question (yes and no) acceptable.
+      </ol>
+
+      <h4>Lab 4</h4>
+      <ol>
+	<li><b>In <code>TCPConnection::segment_received</code>, what
+	    are the three conditions in which the TCPConnection needs
+	    to make <b>sure</b> that the segment receives at least one
+	    ACK segment in reply, and may need to force the TCPSender
+	    to spit out an empty segment to make this happen?</b><br>
+
+	  <ol>
+	    <li>If the incoming segment occupies any sequence numbers
+	      (<code>length_in_sequence_space() > 0</code>)
+
+	    <li>If the <code>TCPReceiver</code> thinks the segment
+	      is unacceptable (<code>TCPReceiver::segment_received()</code> returns <code>false</code>)
+
+	    <li>If the <code>TCPSender</code> thinks the ackno is invalid
+	      (<code>TCPSender::ack_received()</code> returns <code>false</code>)
+	  </ol>
+	  <p>
+
+	<li><b>Okay but hang on, what happens if
+	    the TCPConnection wants to send an ACK
+	    segment but the TCPReceiver's ackno is
+	    missing (e.g. because it hasn't gotten an incoming SYN
+	    yet)?</b><br>
+
+	  If the ackno is missing, then you can't send an ACK segment.
+	  Don't send one in this case.<p>
+
+	    <li><b>When is the connection fully over (i.e., when should
+		<code>active()</code> start returning false?</b><p>
+
+		There are two ways a connection can fully end:
+
+		<ul>
+		  <li><i>[Unclean shutdown]</i> Any segment with the RST flag is sent or received, <b>or</b>
+
+<li> <i>[Clean shutdown]</i> The sender is totally done (meaning, the sender's input stream is at EOF with no bytes in flight) <b>AND</b> the receiver is totally done (meaning, the receiver's output stream has ended) <b>AND either</b>
+
+  <ul>
+<li> <code>_linger_after_streams_finish</code> is false (no need to linger), or
+<li><code>time_since_last_segment_received() >= 10 * _cfg.rt_timeout</code> (we've lingered long enough)
+</ul>
+		</ul><p>
+
+		<li><b>I think I may be having some trouble with my
+logic about when a connection is fully over (i.e., when to stop
+returning <code>true</code> from <code>active()</code>).  Some of my
+tests are timing out. How can I debug this?</b><p>
+
+Check out <a href="https://piazza.com/class/k0u7fdam6082kb?cid=277">this Piazza
+thread</a> for a debugging approach that may help. It may be easier to
+run the client and server manually (as described there) if you want to figure
+out where things are going awry.<p>
+
+	<li><b>The test suite keeps talking about the state of the TCPReceiver and TCPSender&mdash;what are these states?</b><br>
+
+	  The test suite (and
+	  the <a href="https://github.com/CS144/sponge/blob/lab4-startercode/libsponge/tcp_helpers/tcp_state.hh">tcp_state.hh</a>
+	  and <a href="https://github.com/CS144/sponge/blob/lab4-startercode/libsponge/tcp_helpers/tcp_state.cc">tcp_state.cc</a>
+	  files) uses the public interface of your TCPSender and
+	  TCPReceiver to put them in broad categories or states. The
+	  tests make sure that your TCPSender/TCPReceiver are in the
+	  right state at the right time, given the actions taken.<p>
+
+<hr>
+
+Here is a diagram of the expected evolution (and definition of each
+state) for the TCPReceiver. The receiver starts with no ISN (and
+therefore no ackno) (<b>LISTEN</b>). Then it moves to a
+state <b>SYN_SENT</b> where it has received a SYN segment (so there is
+an ackno) but hasn't assembled a FIN segment (so the stream hasn't
+ended). This is where most of the connection happens. Eventually the
+receiver assembles a FIN segment and ends the stream
+(<b>FIN_RECV</b>).
+<p><p>
+
+<img src="images/receiver-evolution.svg">
+
+<p>
+
+<hr>
+
+And here is a diagram of the expected evolution (and definition of
+each state) for the TCPSender. The sender starts with nothing sent
+(<b>CLOSED</b>), then moves to a state <b>SYN_SENT</b> where it has
+sent something but nothing has been acknowledged. At some point, some
+bytes are acknowledged (<b>SYN_ACKED</b>). This is where most of the
+connection happens. Eventually, the stream ends and the sender sends a
+FIN segment (<b>FIN_SENT</b>), and some time after that, the stream is
+over and everything has been acknowledged (<b>FIN_ACKED</b>).
+
+<p>
+
+<p>
+
+<img src="images/sender-evolution.svg"> -->
+
+      </ol>
+    </div>
+  </body>
+</html>

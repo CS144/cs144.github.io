@@ -1,0 +1,3 @@
+[submodule "smartquotesjs"]
+	path = smartquotesjs
+	url = https://github.com/kellym/smartquotesjs
