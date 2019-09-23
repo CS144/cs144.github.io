@@ -1,1 +1,1 @@
-../smartquotesjs/smartquotes.js
+../smartquotesjs/dist/smartquotes.js
