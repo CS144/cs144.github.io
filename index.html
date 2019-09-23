@@ -1,4 +1,125 @@
-Welcome to CS 144 Fall 2019 (website to come). The assignments here are <b>drafts</b>&mdash;please do not start on these if you are a student in the class.
-<p>
-Lab 0 <a href="assignments/lab0.pdf">Assignment</a> | <a href="https://github.com/cs144/sponge">Code</a> | <a href="doc/lab0">Documentation</a><br>
-Lab 1 <a href="assignments/lab1.pdf">Assignment</a> | <a href="https://github.com/cs144/sponge">Code</a> | <a href="doc/lab1">Documentation</a><br>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CS 144: Introduction to Computer Networking">
+    <title>CS 144: Introduction to Computer Networking</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="stanford.png">
+  </head>
+
+  <body>
+    <div class="container" role="main">
+      <h2><span class="text-muted">CS 144:</span> <wbr><span class="text-primary">Introduction to Computer Networking</span><span class="text-muted">,<wbr> Fall 2019</span></h2>
+
+      <div class="progress">
+        <div id="classprogress" class="progress-bar progress-bar-striped" role="progressbar"></div>
+      </div>
+
+      <div class="row">
+	<div class="page-header">
+	  <h3>Course info</h3>
+	</div>
+
+	<div class="panel panel-primary">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Course basics</h3>
+	  </div>
+	  <div class="panel-body">
+	    <div class="col-md-12">
+	      <table class="table">
+		<tr>
+		  <td style="border:none;"><span class="label label-primary">Lectures</span></td><td style="border:none;">Monday, Wednesday, Friday, 2:30 p.m.&ndash;3:20 p.m. in
+		    <a href="https://campus-map.stanford.edu/?srch=320-105">room 320-105</a></td>
+		</tr>
+
+		<tr><td><span class="label label-primary">Lab sessions</span></td><td>Tuesday, 7:30 p.m.&ndash;10 p.m. in <a href="https://campus-map.stanford.edu/?srch=stlc114">STLC 114</a></td></tr>
+
+		<tr><td><span class="label label-primary">Exams</span></td>
+		  <td><b>Midterm:</b> (tentative date) Wednesday, October 30. &nbsp; <b>Final:</b> tba</td></tr>
+
+		<tr><td><span class="label label-primary">Contact</span></td><td>
+To contact the course staff, please feel free to use <a href="https://piazza.com/stanford/fall2019/cs144">Piazza</a>, the lab sessions, or office hours. For private matters or accommodation letters, please email the instructors.</td></tr>
+		<tr><td><span class="label label-primary">Syllabus/logistics</span></td><td><a href="logistics.pdf"><img src="images/pdf.png"> Syllabus/logistics handout</a></td></tr>
+		<tr><td><span class="label label-primary">Piazza</span></td><td>
+		    <a href="https://piazza.com/stanford/fall2019/cs144">CS144 on Piazza</a></td></tr>
+
+	      </table>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="panel panel-info">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Lecturers</h3>
+	  </div>
+	  <div class="panel-body">
+	    <div class="col-md-6">
+	      <p>Keith Winstein</p>
+
+	      <p><span class="text-muted">Email:</span> <img alt="Winstein email address" src="images/keithw-email.svg"><br>
+	      <span class="text-muted">Office hours:</span> <i>in lab session</i></p>
+	    </div>
+	    <div class="col-md-6">
+	      <p>Nick McKeown</p>
+	      <p><span class="text-muted">Email:</span> <img alt="McKeown email address" src="images/nickm-email.svg"><br>
+	      <span class="text-muted">Office hours:</span> <i>tba</i> </p>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="panel panel-success">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Course Assistants</h3>
+	  </div>
+	  <div class="panel-body">
+	    <div class="col-md-4">
+	      <p>Sarah Tollman <span class="label label-info">head CA</span> <br>
+	      <span class="text-muted">Email: stollman <i>at</i> stanford </span></p>
+	    </div>
+	    <div class="col-md-4">
+	      <p>Nicholas Hirning <br>
+	      <span class="text-muted">Email: nhirning <i>at</i> stanford </span></p>
+	    </div>
+	   	<div class="col-md-4">
+	      <p>Alex Ozdemir<br>
+	      <span class="text-muted">Email: aozdemir <i>at</i> stanford </span></p>
+	    </div>	    
+	    <div class="col-md-4">
+	      <p>William Zhuk<br>
+	      <span class="text-muted">Email: waz <i>at</i> stanford </span></p>
+	    </div>
+	    <div class="col-md-4">
+	      <p>Sadjad Fouladi<br>
+	      <span class="text-muted">Email: sadjad <i>at</i> cs.stanford </span></p>
+	    </div>
+	    <div class="col-md-4">
+	      <p>Emily Marx <br>
+	      <span class="text-muted">Email: emarx1 <i>at</i> stanford </span></p>
+	    </div>
+	  </div>
+	</div>
+
+      <div class="row">
+	<div class="page-header">
+	  <h3>Schedule</h3>
+	</div>
+
+	<div class="col-md-12">
+	  <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FLos_Angeles&amp;src=czNxM2IyNm44bGliYjJsaGdlNjFoZnZwYzBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%233F51B5&amp;showTitle=1&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showTabs=1&amp;showCalendars=0&amp;showTz=0&amp;mode=WEEK" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+	</div>
+      </div>
+
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/smartquotes.js"></script>
+      <script>smartquotes()</script>
+      <script>
+	document.getElementById("classprogress").style.width = 100 * ((new Date().getTime() - 1569274200000) / 6400200000) + "%";
+      </script>
+  </body>
+</html>
