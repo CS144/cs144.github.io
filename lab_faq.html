@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CS 144: Lab FAQ">
+    <title>CS 144: Lab FAQ</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="stanford.png">
+  </head>
+
+  <body>
+    <div class="container" role="main">
+      <div class="page-header">
+        <h3>Lab FAQ</h3>
+      </div>
+
+      <h4>General</h4>
+      <ol>
+        <li><b>How will code style be graded?</b></li>
+        <p>Complex pieces of code should be well documented such that they become easy for the reader to understand (but code should not be over-commented). Common, general-purpose components should be decomposed into helper functions to avoid repeated code, but the code should not be over-decomposed to the point that it is difficult to actually understand the flow of execution. Code should be generally readable, use consistent naming conventions, and not contain commented-out code. Please check the return values of all system calls or functions in which an error could occur, and handle such errors gracefully. Your style grade also includes memory errors and leaks, egregious performance issues (e.g. allocating large amounts of memory for no reason) and unnecessarily complex approaches (e.g. implementing a complicated data structure that is only marginally more efficient than a linked list). Please run <code>make format</code> before submitting each assignment and remove any dummy code or comments that were included with the starter code.</p>
+
+        <li><b>How much of my grade will come from style and to the quality of my writeup?</b></li>
+        <p>15%. The remaining 85% comes from functionality.</p>
+
+        <li><b>How do I run an individual test?</b></li>
+        <p><code>ctest -R '^test_name$'</code></p>
+
+        <li><b>Can I add include lines in the header files?</b></li>
+        <p>Sure.</p>
+
+        <li><b>Why does 'make check' fail even though it's in the Sponge README?</b></li>
+        <p>Short Answer: This is a typo in our documentation. You should run <code>make check_lab0</code>, not <code>make check</code>.
+        <br>
+        Long Answer: The make target, <code>check</code>, runs the entire sponge test suite. The full test suite requires a shell script, <code>tun.sh</code>, which you won't get until a later lab. The make target <code>check_lab0</code> will just test lab0. You should be able to run it with the lab0 starter code (although it will return an error until you've completed the lab!).</p>
+
+        <li><b>What's the procedure if I want to use some of my late days?</b></li>
+        <p>You must email the staff list by the lab deadline letting us know if you are using late days. With weekly labs, the CAs want to be able to get feedback to you quickly. As such, we will start grading as soon as the deadline passes, and want to avoid redundantly grading submissions that weren't intended to be final.</p>
+      </ol>
+
+      <h4>Lab 0</h4>
+      <ol>
+        <li><b>What should the behaviour of my program be if the caller tries to peek or pop with a <code>len</code> greater than what is available?</b></li>
+        We don't have any preference on the behavior if the caller tries to peek or pop more than is available in the stream, as long as you behave reasonably and don't crash in that situation. If you want to peek/pop the maximum available, that is fine with us. If you want to throw an exception (either for an overlength peek or an overlength pop), that is also fine with us.
+      </ol>
+
+      <h4>Lab 1</h4>
+      <ol>
+        <li><b>What is the definition of <code>capacity</code>?</b></li>
+        Capacity is the maximum sum of the number of bytes that have been assembled but not yet read and those that are unassembled. For example, if the capacity is 10 bytes, there have been 7 bytes assembled and pushed to the output stream, 4 of which have been read, and there are 5 bytes unassembled, then remaining capacity is 10 - 3 (assembled but not read) - 5 (unassembled) = 2.
+      </ol>
+    </div>
+  </body>
+</html>
