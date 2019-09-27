@@ -40,6 +40,32 @@
 
         <li><b>What's the procedure if I want to use some of my late days?</b></li>
         <p>You must email the staff list by the lab deadline letting us know if you are using late days. With weekly labs, the CAs want to be able to get feedback to you quickly. As such, we will start grading as soon as the deadline passes, and want to avoid redundantly grading submissions that weren't intended to be final.</p>
+
+        <li><b>How do I use <code>git</code>?</b></li>
+        <p>Git commits store a snapshot of the current state of your code. For instance, say you break a feature that you know used to work, but aren't sure which code caused it to break. If you made a commit after getting that feature working, you can checkout that commit to see what things looked like in the good old days when it worked. So, make a commit every time you get something working! To make a commit:<br>
+        First, git add the files you've changed - you must add before every commit. e.g. <code>git add ../libsponge/byte_stream.*</code><br>
+        Then, commit with a message describing the state of the code. e.g. <code>git commit -m "All tests pass except many_writes times out."</code><br>
+        You can see which files you modified by running <code>git status</code>.<br>
+        A handy shortcut to commit all modified files is <code>git commit -am "[message]"</code>.<br>
+        Don't <code>git push</code> - when you're ready to submit, you'll use git bundle instead to package your commits.</p>
+
+        <li><b>How do I debug?</b></li>
+        <p><code>gdb</code> is a great tool for debugging the labs! Check out the <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/resources/gdb">CS107 guide</a> if you need a refresher.<br>
+
+        To use <code>gdb</code> to debug a test:
+        <ol>
+          <li>Install <code>gdb</code> (on the VM, <code>sudo apt-get install gdb</code>).</li>
+          <li>Start <code>gdb</code> on the executable corresponding to the test you want to debug (from the <code>build</code> directory, <code>ls tests</code> to see the executables). e.g. from the build directory: <code>gdb tests/byte_stream_one_write</code>.</li>
+          <li>The output of the test failure will show you the part of the test that failed. To set a breakpoint at that part of the test, break on the line in the test file where the test harness for that part is created. The test files are in <code>sponge/tests</code> (not <code>sponge/build/tests</code>). e.g. if you're failing the <code>write-pop2-end</code> test in <code>byte_stream_one_write</code>, <code>break 83</code> (i.e. where the <code>write-pop2-end</code> test harness is created).</li>
+          <li>You can set breakpoints on your functions using the function names, as usual.</li>
+        </ol>
+
+        Other notes:
+        <ul>
+          <li>We don't recommend modifying any files in the <code>libsponge/util</code> directory, since messing up the sponge library will make debugging difficult.</li>
+          <li>If a test is timing out, but you want to check if it passes without the timeout, run the test executable individually, which won't enforce the timeout. e.g. from the build directory: <code>./tests/byte_stream_one_write</code>.</li>
+          <li><code>gdb</code> may help debug timeouts. While running the test in <code>gdb</code>, if it appears to hang (meaning it may be executing a slow portion of code), ctrl-C and backtrace to pause and see which code was executing.</li>
+        </ul></p>
       </ol>
 
       <h4>Lab 0</h4>
