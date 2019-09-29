@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="CS 144: Lab FAQ">
-    <title>CS 144: Lab FAQ</title>
+    <title>CS 144: Lab FAQs</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
@@ -16,14 +16,27 @@
   <body>
     <div class="container" role="main">
       <div class="page-header">
-        <h3>Lab FAQ</h3>
+        <h3>Lab FAQs</h3>
       </div>
 
       <h4>General</h4>
       <ol>
-        <li><b>How will code style be graded?</b></li>
-        <p>Complex pieces of code should be well documented such that they become easy for the reader to understand (but code should not be over-commented). Common, general-purpose components should be decomposed into helper functions to avoid repeated code, but the code should not be over-decomposed to the point that it is difficult to actually understand the flow of execution. Code should be generally readable, use consistent naming conventions, and not contain commented-out code. Please check the return values of all system calls or functions in which an error could occur, and handle such errors gracefully. Your style grade also includes memory errors and leaks, egregious performance issues (e.g. allocating large amounts of memory for no reason) and unnecessarily complex approaches (e.g. implementing a complicated data structure that is only marginally more efficient than a linked list). Please run <code>make format</code> before submitting each assignment and remove any dummy code or comments that were included with the starter code.</p>
+        <li><b>How will code style be graded?</b>
+        <p>Here are some guidelines:
+<ul><li>Complex pieces of code should be documented in comments so that they become easier for the reader to understand&mdash;but don't overdo it with comments for trivial things.
+<li>Common, general-purpose functionality should be decomposed into helper functions to avoid repeated code&mdash;don't overdo this either, e.g. by making it difficult to understand the flow of execution.
+<li>Code should use consistent naming conventions and not contain commented-out code or vestiges of debugging.
 
+<li>Please check the return values of all functions in which an error could occur, and handle these errors gracefully. Throwing an exception is one graceful way
+to handle an unrecoverable error.
+
+<li>Avoid memory errors and leaks, egregious performance issues (e.g. allocating large amounts of memory for no reason) or unnecessarily complex approaches (e.g. a complicated data structure that is only marginally more efficient than something much simpler, or something available in the C++ standard library).
+
+<li>You can check your code for memory leaks, invalid accesses, and undefined behavior by compiling with <code>cmake .. -DCMAKE_BUILD_TYPE=RelASan</code> and then <code>make clean</code>, <code>make</code>, then <code>make check</code> or running any of the individual apps.
+
+<li>Before submitting each assignment, please run <code>make format</code> (to standardize the formatting), and make sure to remove any dummy code or comments that were included with the starter code.
+</ul>
+<p>
         <li><b>How much of my grade will come from style and to the quality of my writeup?</b></li>
         <p>15%. The remaining 85% comes from functionality.</p>
 
@@ -39,13 +52,16 @@
         Long Answer: The make target, <code>check</code>, runs the entire sponge test suite. The full test suite requires a shell script, <code>tun.sh</code>, which you won't get until a later lab. The make target <code>check_lab0</code> will just test lab0. You should be able to run it with the lab0 starter code (although it will return an error until you've completed the lab!).</p>
 
         <li><b>What's the procedure if I want to use some of my late days?</b></li>
-        <p>You must email the staff list by the lab deadline letting us know if you are using late days. With weekly labs, the CAs want to be able to get feedback to you quickly. As such, we will start grading as soon as the deadline passes, and want to avoid redundantly grading submissions that weren't intended to be final.</p>
+        <p>To use a late day, please email the staff list by the lab deadline, letting us know if you are using late days. With weekly labs, the CAs want to be able to get feedback to you quickly. As such, we will start grading as soon as the deadline passes, and want to avoid redundantly grading submissions that weren't intended to be final.</p>
 
         <li><b>How do I use <code>git</code>?</b></li>
-        <p>Git commits store a snapshot of the current state of your code. For instance, say you break a feature that you know used to work, but aren't sure which code caused it to break. If you made a commit after getting that feature working, you can checkout that commit to see what things looked like in the good old days when it worked. So, make a commit every time you get something working! To make a commit:<br>
+
+	<p>Here are some links to <a href="https://try.github.io/">resources to learn Git</a>.
+
+        <p><b>Brief summary:</b> Git commits store a snapshot of the current state of your code. For instance, say you break a feature that you know used to work, but aren't sure which code caused it to break. If you made a commit after getting that feature working, you can checkout that commit to see what things looked like in the good old days when it worked. So, make a commit every time you get something working! To make a commit:<br>
         First, git add the files you've changed - you must add before every commit. e.g. <code>git add ../libsponge/byte_stream.*</code><br>
         Then, commit with a message describing the state of the code. e.g. <code>git commit -m "All tests pass except many_writes times out."</code><br>
-        You can see which files you modified by running <code>git status</code>.<br>
+        You can see which files you modified by running <code>git status</code>. To really understand the state of a Git repository, the command-line <code>tig</code> tool, or the graphical <code>gitk</code> tool, can be very helpful.<br>
         A handy shortcut to commit all modified files is <code>git commit -am "[message]"</code>.<br>
         Don't <code>git push</code> - when you're ready to submit, you'll use git bundle instead to package your commits.</p>
 
