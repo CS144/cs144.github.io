@@ -92,8 +92,10 @@ to handle an unrecoverable error.
 
       <h4>Lab 1</h4>
       <ol>
-        <li><b>What is the definition of <code>capacity</code>?</b></li>
-        Capacity is the maximum sum of the number of bytes that have been assembled but not yet read and those that are unassembled. For example, if the capacity is 10 bytes, there have been 7 bytes assembled and pushed to the output stream, 4 of which have been read, and there are 5 bytes unassembled, then remaining capacity is 10 - 3 (assembled but not read) - 5 (unassembled) = 2.
+        <li><b>Which bytes should be accepted in a <code>push_substring</code> call?</b></li>
+        Those whose index is within <code>capacity</code> indices of the first unread byte in the re-assembled stream.
+        Pictorally:
+        <image src="images/reassembler.png" />
       </ol>
     </div>
   </body>
