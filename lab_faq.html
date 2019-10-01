@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CS 144: Lab FAQ">
+    <title>CS 144: Lab FAQs</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="stanford.png">
+  </head>
+
+  <body>
+    <div class="container" role="main">
+      <div class="page-header">
+        <h3>Lab FAQs</h3>
+      </div>
+
+      <h4>General</h4>
+      <ol>
+        <li><b>How will code style be graded?</b>
+        <p>Here are some guidelines:
+<ul><li>Complex pieces of code should be documented in comments so that they become easier for the reader to understand&mdash;but don't overdo it with comments for trivial things.
+<li>Common, general-purpose functionality should be decomposed into helper functions to avoid repeated code&mdash;don't overdo this either, e.g. by making it difficult to understand the flow of execution.
+<li>Code should use consistent naming conventions and not contain commented-out code or vestiges of debugging.
+
+<li>Please check the return values of all functions in which an error could occur, and handle these errors gracefully. Throwing an exception is one graceful way
+to handle an unrecoverable error.
+
+<li>Avoid memory errors and leaks, egregious performance issues (e.g. allocating large amounts of memory for no reason) or unnecessarily complex approaches (e.g. a complicated data structure that is only marginally more efficient than something much simpler, or something available in the C++ standard library).
+
+<li>You can check your code for memory leaks, invalid accesses, and undefined behavior by compiling with <code>cmake .. -DCMAKE_BUILD_TYPE=RelASan</code> and then <code>make clean</code>, <code>make</code>, then <code>make check</code> or running any of the individual apps.
+
+<li>Before submitting each assignment, please run <code>make format</code> (to standardize the formatting), and make sure to remove any dummy code or comments that were included with the starter code.
+</ul>
+<p>
+        <li><b>How much of my grade will come from style and to the quality of my writeup?</b></li>
+        <p>15%. The remaining 85% comes from functionality.</p>
+
+        <li><b>How do I run an individual test?</b></li>
+        <p><code>ctest -R '^test_name$'</code></p>
+
+        <li><b>Can I add include lines in the header files?</b></li>
+        <p>Sure.</p>
+
+        <li><b>Why does 'make check' fail even though it's in the Sponge README?</b></li>
+        <p>Short Answer: This is a typo in our documentation. You should run <code>make check_lab0</code>, not <code>make check</code>.
+        <br>
+        Long Answer: The make target, <code>check</code>, runs the entire sponge test suite. The full test suite requires a shell script, <code>tun.sh</code>, which you won't get until a later lab. The make target <code>check_lab0</code> will just test lab0. You should be able to run it with the lab0 starter code (although it will return an error until you've completed the lab!).</p>
+
+        <li><b>What's the procedure if I want to use some of my late days?</b></li>
+        <p>To use a late day, please email the staff list by the lab deadline, letting us know if you are using late days. With weekly labs, the CAs want to be able to get feedback to you quickly. As such, we will start grading as soon as the deadline passes, and want to avoid redundantly grading submissions that weren't intended to be final.</p>
+
+        <li><b>How do I use <code>git</code>?</b></li>
+
+	<p>Here are some links to <a href="https://try.github.io/">resources to learn Git</a>.
+
+        <p><b>Brief summary:</b> Git commits store a snapshot of the current state of your code. For instance, say you break a feature that you know used to work, but aren't sure which code caused it to break. If you made a commit after getting that feature working, you can checkout that commit to see what things looked like in the good old days when it worked. So, make a commit every time you get something working! To make a commit:<br>
+        First, git add the files you've changed - you must add before every commit. e.g. <code>git add ../libsponge/byte_stream.*</code><br>
+        Then, commit with a message describing the state of the code. e.g. <code>git commit -m "All tests pass except many_writes times out."</code><br>
+        You can see which files you modified by running <code>git status</code>. To really understand the state of a Git repository, the command-line <code>tig</code> tool, or the graphical <code>gitk</code> tool, can be very helpful.<br>
+        A handy shortcut to commit all modified files is <code>git commit -am "[message]"</code>.<br>
+        Don't <code>git push</code> - when you're ready to submit, you'll use git bundle instead to package your commits.</p>
+
+        <li><b>How do I debug?</b></li>
+        <p><code>gdb</code> is a great tool for debugging the labs! Check out the <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/resources/gdb">CS107 guide</a> if you need a refresher.<br>
+
+        To use <code>gdb</code> to debug a test:
+        <ol>
+          <li>Install <code>gdb</code> (on the VM, <code>sudo apt-get install gdb</code>).</li>
+          <li>Start <code>gdb</code> on the executable corresponding to the test you want to debug (from the <code>build</code> directory, <code>ls tests</code> to see the executables). e.g. from the build directory: <code>gdb tests/byte_stream_one_write</code>.</li>
+          <li>The output of the test failure will show you the part of the test that failed. To set a breakpoint at that part of the test, break on the line in the test file where the test harness for that part is created. The test files are in <code>sponge/tests</code> (not <code>sponge/build/tests</code>). e.g. if you're failing the <code>write-pop2-end</code> test in <code>byte_stream_one_write</code>, <code>break 83</code> (i.e. where the <code>write-pop2-end</code> test harness is created).</li>
+          <li>You can set breakpoints on your functions using the function names, as usual.</li>
+        </ol>
+
+        Other notes:
+        <ul>
+          <li>We don't recommend modifying any files in the <code>libsponge/util</code> directory, since messing up the sponge library will make debugging difficult.</li>
+          <li>If a test is timing out, but you want to check if it passes without the timeout, run the test executable individually, which won't enforce the timeout. e.g. from the build directory: <code>./tests/byte_stream_one_write</code>.</li>
+          <li><code>gdb</code> may help debug timeouts. While running the test in <code>gdb</code>, if it appears to hang (meaning it may be executing a slow portion of code), ctrl-C and backtrace to pause and see which code was executing.</li>
+        </ul></p>
+      </ol>
+
+      <h4>Lab 0</h4>
+      <ol>
+        <li><b>What should the behaviour of my program be if the caller tries to peek or pop with a <code>len</code> greater than what is available?</b></li>
+        We don't have any preference on the behavior if the caller tries to peek or pop more than is available in the stream, as long as you behave reasonably and don't crash in that situation. If you want to peek/pop the maximum available, that is fine with us. If you want to throw an exception (either for an overlength peek or an overlength pop), that is also fine with us.
+      </ol>
+
+      <h4>Lab 1</h4>
+      <ol>
+        <li><b>What is the definition of <code>capacity</code>?</b></li>
+        Capacity is the maximum sum of the number of bytes that have been assembled but not yet read and those that are unassembled. For example, if the capacity is 10 bytes, there have been 7 bytes assembled and pushed to the output stream, 4 of which have been read, and there are 5 bytes unassembled, then remaining capacity is 10 - 3 (assembled but not read) - 5 (unassembled) = 2.
+      </ol>
+    </div>
+  </body>
+</html>
