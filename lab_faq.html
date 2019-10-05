@@ -65,7 +65,18 @@ Your style grade may also include components of functionality not covered by the
         Then, commit with a message describing the state of the code. e.g. <code>git commit -m "All tests pass except many_writes times out."</code><br>
         You can see which files you modified by running <code>git status</code>. To really understand the state of a Git repository, the command-line <code>tig</code> tool, or the graphical <code>gitk</code> tool, can be very helpful.<br>
         A handy shortcut to commit all modified files is <code>git commit -am "[message]"</code>.<br>
-        Don't <code>git push</code> - when you're ready to submit, you'll use git bundle instead to package your commits.</p>
+        Don't <code>git push</code> - when you're ready to submit, you'll use git bundle instead to package your commits.
+        <p><b>Sanity check:</b> If you want to verify that you have submitted exactly the files you intended to, you may find the following useful.<br>
+        First, once you've committed, run <code>git status</code>. You should see a message saying <code>nothing to commit, working tree clean</code>. If you have uncommitted changes, you'll see this instead: <code>Changes not staged for commit:</code>.
+        <br>
+        Second, after you've copied your git bundle to rice, and logged into rice:
+        <ol>
+          <li>Run <code>$ git clone [bundle name] [unbundled name]</code>.</li>
+          <li><code>cd</code> into the unbundled directory.</li>
+          <li>Run <code>$ git log</code> and verify that you see the commits you expect to.
+          <li>Copy the commit hash of the starter code commit.</li>
+          <li>Run <code>$ git diff [hash]</code> to make sure they see all changes you want to submit.</li>
+        </ol></p>
 
         <li><b>How do I debug?</b></li>
         <p><code>gdb</code> is a great tool for debugging the labs! Check out the <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/resources/gdb">CS107 guide</a> if you need a refresher.<br>
