@@ -100,6 +100,14 @@ to handle an unrecoverable error.
         It's possible to implement an interface-correct reassembler which stores overlapping substrings.
         However, allowing the re-assembler to do this undermines the notion of <code>capacity</code> as a memory limit, so we'll consider the storage of overlapping substrings to be a style violation when grading.
       </ol>
+
+      <h4>Lab 2</h4>
+      <ol>
+        <li><b>Can we use <code>static_cast</code> in functions for <code>WrappingInt32</code>?</b></li>
+        Yes, these kinds of functions (those that explicitly convert between
+        numeric types) present exactly the kind of situation in which
+        <code>static_case</code> is appropriate.
+      </ol>
     </div>
   </body>
 </html>
