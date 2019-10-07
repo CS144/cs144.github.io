@@ -119,7 +119,12 @@ Your style grade may also include components of functionality not covered by the
         <li><b>Can we use <code>static_cast</code> in functions for <code>WrappingInt32</code>?</b></li>
         Yes, these kinds of functions (those that explicitly convert between
         numeric types) present exactly the kind of situation in which
-        <code>static_cast</code> is appropriate.
+        <code>static_cast</code> is appropriate. Note also that
+        you don't
+	<em>need</em> to use <code>static_cast</code> if you don't
+	want to&mdash;you can
+	explicitly construct a WrappingInt32 with syntax
+	like <code>WrappingInt32{x}</code>.
       </ol>
     </div>
   </body>
