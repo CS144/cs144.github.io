@@ -124,7 +124,18 @@ Your style grade may also include components of functionality not covered by the
 	<em>need</em> to use <code>static_cast</code> if you don't
 	want to&mdash;you can
 	explicitly construct a WrappingInt32 with syntax
-	like <code>WrappingInt32{x}</code>.
+	like <code>WrappingInt32{x}</code>.<p>
+
+	<li><b>Should <code>TCPReceiver::segment_received()</code> return
+	  true if <em>any</em> part of the segment is inside the window,
+	  even if both the beginning and end of the segment are outside
+	  the window?</b></li>
+
+	Good question&mdash;please
+	see <a href="https://piazza.com/class/k0u7fdam6082kb?cid=136">our
+	Piazza note</a> where we clarify this. The short answer is
+	that we've deleted a test in the lab2 starter code in order to
+	make both answers to this question (yes and no) acceptable.
       </ol>
     </div>
   </body>
