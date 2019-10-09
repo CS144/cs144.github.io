@@ -36,9 +36,11 @@ to handle an unrecoverable error.
 
 <li>Before submitting each assignment, please run <code>make format</code> (to standardize the formatting), and make sure to remove any dummy code or comments that were included with the starter code.
 </ul>
+
+Your style grade may also include components of functionality not covered by the tests.
 <p>
         <li><b>How much of my grade will come from style and to the quality of my writeup?</b></li>
-        <p>15%. The remaining 85% comes from functionality.</p>
+        <p>Grading breakdown for labs: 15% style, 10% writeup, 75% functionality.</p>
 
         <li><b>How do I run an individual test?</b></li>
         <p><code>ctest -R '^test_name$'</code></p>
@@ -52,7 +54,7 @@ to handle an unrecoverable error.
         Long Answer: The make target, <code>check</code>, runs the entire sponge test suite. The full test suite requires a shell script, <code>tun.sh</code>, which you won't get until a later lab. The make target <code>check_lab0</code> will just test lab0. You should be able to run it with the lab0 starter code (although it will return an error until you've completed the lab!).</p>
 
         <li><b>What's the procedure if I want to use some of my late days?</b></li>
-        <p>To use a late day, please email the staff list by the lab deadline, letting us know if you are using late days. With weekly labs, the CAs want to be able to get feedback to you quickly. As such, we will start grading as soon as the deadline passes, and want to avoid redundantly grading submissions that weren't intended to be final.</p>
+        <p>To use a late day, please email the staff list (cs144-aut1920-staff@lists.stanford.edu) by the lab deadline, letting us know if you are using late days. With weekly labs, the CAs want to be able to get feedback to you quickly. As such, we will start grading as soon as the deadline passes, and want to avoid redundantly grading submissions that weren't intended to be final.</p>
 
         <li><b>How do I use <code>git</code>?</b></li>
 
@@ -63,7 +65,18 @@ to handle an unrecoverable error.
         Then, commit with a message describing the state of the code. e.g. <code>git commit -m "All tests pass except many_writes times out."</code><br>
         You can see which files you modified by running <code>git status</code>. To really understand the state of a Git repository, the command-line <code>tig</code> tool, or the graphical <code>gitk</code> tool, can be very helpful.<br>
         A handy shortcut to commit all modified files is <code>git commit -am "[message]"</code>.<br>
-        Don't <code>git push</code> - when you're ready to submit, you'll use git bundle instead to package your commits.</p>
+        Don't <code>git push</code> - when you're ready to submit, you'll use git bundle instead to package your commits.
+        <p><b>Sanity check:</b> If you want to verify that you have submitted exactly the files you intended to, you may find the following useful.<br>
+        First, once you've committed, run <code>git status</code>. You should see a message saying <code>nothing to commit, working tree clean</code>. If you have uncommitted changes, you'll see this instead: <code>Changes not staged for commit:</code>.
+        <br>
+        Second, after you've copied your git bundle to rice, and logged into rice:
+        <ol>
+          <li>Run <code>$ git clone [bundle name] [unbundled name]</code>.</li>
+          <li><code>cd</code> into the unbundled directory.</li>
+          <li>Run <code>$ git log</code> and verify that you see the commits you expect to.
+          <li>Copy the commit hash of the starter code commit.</li>
+          <li>Run <code>$ git diff [hash]</code> to make sure they see all changes you want to submit.</li>
+        </ol></p>
 
         <li><b>How do I debug?</b></li>
         <p><code>gdb</code> is a great tool for debugging the labs! Check out the <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/resources/gdb">CS107 guide</a> if you need a refresher.<br>
@@ -92,8 +105,37 @@ to handle an unrecoverable error.
 
       <h4>Lab 1</h4>
       <ol>
-        <li><b>What is the definition of <code>capacity</code>?</b></li>
-        Capacity is the maximum sum of the number of bytes that have been assembled but not yet read and those that are unassembled. For example, if the capacity is 10 bytes, there have been 7 bytes assembled and pushed to the output stream, 4 of which have been read, and there are 5 bytes unassembled, then remaining capacity is 10 - 3 (assembled but not read) - 5 (unassembled) = 2.
+        <li><b>Which bytes should be accepted in a <code>push_substring</code> call?</b></li>
+        Those whose index is within <code>capacity</code> indices of the first unread byte in the re-assembled stream.
+        Pictorally:
+        <image src="images/reassembler.png" />
+        <li><b>Is it okay for our re-assembly data structure to store overlapping substrings?</b></li>
+        It's possible to implement an interface-correct reassembler which stores overlapping substrings.
+        However, allowing the re-assembler to do this undermines the notion of <code>capacity</code> as a memory limit, so we'll consider the storage of overlapping substrings to be a style violation when grading.
+      </ol>
+
+      <h4>Lab 2</h4>
+      <ol>
+        <li><b>Can we use <code>static_cast</code> in functions for <code>WrappingInt32</code>?</b></li>
+        Yes, these kinds of functions (those that explicitly convert between
+        numeric types) present exactly the kind of situation in which
+        <code>static_cast</code> is appropriate. Note also that
+        you don't
+	<em>need</em> to use <code>static_cast</code> if you don't
+	want to&mdash;you can
+	explicitly construct a WrappingInt32 with syntax
+	like <code>WrappingInt32{x}</code>.<p>
+
+	<li><b>Should <code>TCPReceiver::segment_received()</code> return
+	  true if <em>any</em> part of the segment is inside the window,
+	  even if both the beginning and end of the segment are outside
+	  the window?</b></li>
+
+	Good question&mdash;please
+	see <a href="https://piazza.com/class/k0u7fdam6082kb?cid=136">our
+	Piazza note</a> where we clarify this. The short answer is
+	that we've deleted a test in the lab2 starter code in order to
+	make both answers to this question (yes and no) acceptable.
       </ol>
     </div>
   </body>
