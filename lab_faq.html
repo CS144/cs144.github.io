@@ -151,7 +151,7 @@ Your style grade may also include components of functionality not covered by the
 	      (<code>length_in_sequence_space() > 0</code>)
 
 	    <li>If the <code>TCPReceiver</code> thinks the segment
-	      is completely outside the window (<code>TCPReceiver::segment_received()</code> returns <code>false</code>)
+	      is unacceptable (<code>TCPReceiver::segment_received()</code> returns <code>false</code>)
 
 	    <li>If the <code>TCPSender</code> thinks the ackno is invalid
 	      (<code>TCPSender::ack_received()</code> returns <code>false</code>)
@@ -166,6 +166,22 @@ Your style grade may also include components of functionality not covered by the
 
 	  If the ackno is missing, then you can't send an ACK segment.
 	  Don't send one in this case.<p>
+
+	    <li><b>When is the connection fully over (i.e., when should
+		<code>active()</code> start returning false?</b><p>
+
+		There are two ways a connection can fully end:
+
+		<ul>
+		  <li><i>[Unclean shutdown]</i> Any segment with the RST flag is sent or received, <b>or</b>
+
+<li> <i>[Clean shutdown]</i> The sender is totally done (meaning, the sender's input stream is at EOF with no bytes in flight) <b>AND</b> the receiver is totally done (meaning, the receiver's output stream has ended) <b>AND either</b>
+
+  <ul>
+<li> <code>_linger_after_streams_finish</code> is false (no need to linger), or
+<li><code>time_since_last_segment_received() >= 10 * _cfg.rt_timeout</code> (we've lingered long enough)
+</ul>
+		</ul><p>
 
 	<li><b>The test suite keeps talking about the state of the TCPReceiver and TCPSender&mdash;what are these states?</b><br>
 
