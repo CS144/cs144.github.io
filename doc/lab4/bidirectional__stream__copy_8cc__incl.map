@@ -1,9 +1,0 @@
-<map id="/home/cs144/sponge/apps/bidirectional_stream_copy.cc" name="/home/cs144/sponge/apps/bidirectional_stream_copy.cc">
-<area shape="rect" id="node2" href="$bidirectional__stream__copy_8hh.html" title="bidirectional_stream\l_copy.hh" alt="" coords="494,109,632,151"/>
-<area shape="rect" id="node24" href="$byte__stream_8hh.html" title="byte_stream.hh" alt="" coords="606,273,718,300"/>
-<area shape="rect" id="node26" href="$eventloop_8hh.html" title="eventloop.hh" alt="" coords="880,199,976,225"/>
-<area shape="rect" id="node3" href="$socket_8hh.html" title="socket.hh" alt="" coords="425,199,504,225"/>
-<area shape="rect" id="node4" href="$address_8hh.html" title="address.hh" alt="" coords="304,273,390,300"/>
-<area shape="rect" id="node12" href="$file__descriptor_8hh.html" title="file_descriptor.hh" alt="" coords="810,273,932,300"/>
-<area shape="rect" id="node13" href="$buffer_8hh.html" title="buffer.hh" alt="" coords="894,348,968,375"/>
-</map>

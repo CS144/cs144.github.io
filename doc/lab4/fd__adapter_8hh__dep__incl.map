@@ -1,9 +1,0 @@
-<map id="/home/cs144/sponge/libsponge/tcp_helpers/fd_adapter.hh" name="/home/cs144/sponge/libsponge/tcp_helpers/fd_adapter.hh">
-<area shape="rect" id="node2" href="$fd__adapter_8cc.html" title="/home/cs144/sponge\l/libsponge/tcp_helpers\l/fd_adapter.cc" alt="" coords="54,109,206,165"/>
-<area shape="rect" id="node3" href="$tcp__sponge__socket_8hh.html" title="/home/cs144/sponge\l/libsponge/tcp_helpers\l/tcp_sponge_socket.hh" alt="" coords="165,213,322,269"/>
-<area shape="rect" id="node7" href="$tunfd__adapter_8hh.html" title="/home/cs144/sponge\l/libsponge/tcp_helpers\l/tunfd_adapter.hh" alt="" coords="281,109,433,165"/>
-<area shape="rect" id="node4" href="$tcp__ipv4_8cc.html" title="/home/cs144/sponge\l/apps/tcp_ipv4.cc" alt="" coords="5,325,148,366"/>
-<area shape="rect" id="node5" href="$tcp__udp_8cc.html" title="/home/cs144/sponge\l/apps/tcp_udp.cc" alt="" coords="172,325,315,366"/>
-<area shape="rect" id="node6" href="$tcp__sponge__socket_8cc.html" title="/home/cs144/sponge\l/libsponge/tcp_helpers\l/tcp_sponge_socket.cc" alt="" coords="339,317,497,373"/>
-<area shape="rect" id="node8" href="$tunfd__adapter_8cc.html" title="/home/cs144/sponge\l/libsponge/tcp_helpers\l/tunfd_adapter.cc" alt="" coords="346,213,498,269"/>
-</map>

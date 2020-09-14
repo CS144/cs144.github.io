@@ -1,7 +1,0 @@
-<map id="/home/cs144/sponge/libsponge/tcp_helpers/arp_message.cc" name="/home/cs144/sponge/libsponge/tcp_helpers/arp_message.cc">
-<area shape="rect" id="node2" href="$arp__message_8hh.html" title="arp_message.hh" alt="" coords="646,109,765,136"/>
-<area shape="rect" id="node3" href="$ethernet__header_8hh.html" title="ethernet_header.hh" alt="" coords="712,184,845,211"/>
-<area shape="rect" id="node18" href="$ipv4__header_8hh.html" title="ipv4_header.hh" alt="" coords="577,184,687,211"/>
-<area shape="rect" id="node4" href="$parser_8hh.html" title="parser.hh" alt="" coords="623,259,699,285"/>
-<area shape="rect" id="node5" href="$buffer_8hh.html" title="buffer.hh" alt="" coords="381,333,454,360"/>
-</map>
