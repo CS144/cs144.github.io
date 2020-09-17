@@ -100,7 +100,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae62172814cd4ed0314c1772d931eaed2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_byte_stream.html#ae62172814cd4ed0314c1772d931eaed2">pop_output</a> (const <a class="elRef" target="_blank" href="https://en.cppreference.com/w/cpp/types/size_t.html">size_t</a> len)</td></tr>
 <tr class="memdesc:ae62172814cd4ed0314c1772d931eaed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove bytes from the buffer.  <a href="class_byte_stream.html#ae62172814cd4ed0314c1772d931eaed2">More...</a><br /></td></tr>
 <tr class="separator:ae62172814cd4ed0314c1772d931eaed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a682c7b2501245dd98385789c2deb0bdf"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="https://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_byte_stream.html#a682c7b2501245dd98385789c2deb0bdf">read</a> (const size_t len)</td></tr>
+<tr class="memitem:a682c7b2501245dd98385789c2deb0bdf"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="https://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_byte_stream.html#a682c7b2501245dd98385789c2deb0bdf">read</a> (const <a class="elRef" target="_blank" href="https://en.cppreference.com/w/cpp/types/size_t.html">size_t</a> len)</td></tr>
 <tr class="separator:a682c7b2501245dd98385789c2deb0bdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a4a5050f50476e40535dbdbbfccfad1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_byte_stream.html#a4a4a5050f50476e40535dbdbbfccfad1">input_ended</a> () const</td></tr>
 <tr class="separator:a4a4a5050f50476e40535dbdbbfccfad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -390,13 +390,22 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="elRef" target="_blank" href="https://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> ByteStream::read </td>
           <td>(</td>
-          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="https://en.cppreference.com/w/cpp/types/size_t.html">size_t</a>&#160;</td>
           <td class="paramname"><em>len</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read (i.e., copy and then pop) the next "len" bytes of the stream </p><dl class="section return"><dt>Returns</dt><dd>a string </dd></dl>
+<p>Read (i.e., copy and then pop) the next "len" bytes of the stream </p><dl class="section return"><dt>Returns</dt><dd>a string</dd></dl>
+<p>Read (i.e., copy and then pop) the next "len" bytes of the stream </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>bytes will be popped and returned </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="byte__stream_8cc_source.html#l00034">34</a> of file <a class="el" href="byte__stream_8cc_source.html">byte_stream.cc</a>.</p>
 
 </div>
 </div>
