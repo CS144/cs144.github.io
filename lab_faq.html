@@ -21,7 +21,7 @@
 
       <h4>General</h4>
       <ol>
-        <li><b>How will code style be graded?</b>
+        <li><b>How will implementation soundness and style be graded?</b>
         <p>Here are some guidelines:
 <ul><li>Complex pieces of code should be documented in comments so that they become easier for the reader to understand&mdash;but don't overdo it with comments for trivial things.
 <li>Common, general-purpose functionality should be decomposed into helper functions to avoid repeated code&mdash;don't overdo this either, e.g. by making it difficult to understand the flow of execution.
@@ -32,41 +32,29 @@ to handle an unrecoverable error.
 
 <li>Avoid memory errors and leaks, egregious performance issues (e.g. allocating large amounts of memory for no reason) or unnecessarily complex approaches (e.g. a complicated data structure that is only marginally more efficient than something much simpler, or something available in the C++ standard library).
 
-<li>You can check your code for memory leaks, invalid accesses, and undefined behavior by compiling with <code>cmake .. -DCMAKE_BUILD_TYPE=RelASan</code> and then <code>make clean</code>, <code>make</code>, then <code>make check</code> or running any of the individual apps.
+<li>Before submitting each assignment, please run <code>cmake --build build --target format</code> (to standardize the formatting), and make sure to remove any dummy code or comments that were included with the starter code.
 
-<li>Before submitting each assignment, please run <code>make format</code> (to standardize the formatting), and make sure to remove any dummy code or comments that were included with the starter code.
+<li>Also (optionally) run <code>cmake --build build --target tidy</code> to receive suggestions for improvements related to C++ programming practices.
 </ul>
 
 Your style grade may also include components of functionality not covered by the tests.
 <p>
-        <li><b>How much of my grade will come from style and to the quality of my writeup?</b></li>
-        <p>Grading breakdown for labs: 15% style, 10% writeup, 75% functionality.</p>
-
         <li><b>How do I run an individual test?</b></li>
         <p><code>ctest -R '^test_name$'</code></p>
 
         <li><b>Can I add include lines in the header files?</b></li>
         <p>Sure.</p>
 
-        <li><b>Why does 'make check' fail even though it's in the Sponge README?</b></li>
-        <p>Short Answer: This is a typo in our documentation. You should run <code>make check_lab0</code>, not <code>make check</code>.
-        <br>
-        Long Answer: The make target, <code>check</code>, runs the entire sponge test suite. The full test suite requires a shell script, <code>tun.sh</code>, which you won't get until a later lab. The make target <code>check_lab0</code> will just test lab0. You should be able to run it with the lab0 starter code (although it will return an error until you've completed the lab!).</p>
-
-        <li><b>What's the procedure if I want to use some of my late days?</b></li>
-        <p>To use a late day, please email the staff list (cs144-staff@cs.stanford.edu) by the lab deadline, letting us know if you are using late days. With weekly labs, the CAs want to be able to get feedback to you quickly. As such, we will start grading as soon as the deadline passes, and want to avoid redundantly grading submissions that weren't intended to be final.</p>
-
         <li><b>How do I use <code>git</code>?</b></li>
 
 	<p>Here are some links to <a href="https://try.github.io/">resources to learn Git</a>.
 
         <p><b>Brief summary:</b> Git commits store a snapshot of the current state of your code. For instance, say you break a feature that you know used to work, but aren't sure which code caused it to break. If you made a commit after getting that feature working, you can checkout that commit to see what things looked like in the good old days when it worked. So, make a commit every time you get something working! To make a commit:<br>
-        First, git add the files you've changed - you must add before every commit. e.g. <code>git add ../libsponge/byte_stream.*</code><br>
+        First, git add the files you've changed - you must add before every commit. e.g. <code>git add ./src/byte_stream.*</code><br>
         Then, commit with a message describing the state of the code. e.g. <code>git commit -m "All tests pass except many_writes times out."</code><br>
         You can see which files you modified by running <code>git status</code>. To really understand the state of a Git repository, the command-line <code>tig</code> tool, or the graphical <code>gitk</code> tool, can be very helpful.<br>
         A handy shortcut to commit all modified files is <code>git commit -am "[message]"</code>.<br>
-        Don't <code>git push</code> - when you're ready to submit, you'll use git bundle instead to package your commits.
-        <p><b>Sanity check:</b> If you want to verify that you have submitted exactly the files you intended to, you may find the following useful.<br>
+        <p><b>Reality check:</b> If you want to verify that you have submitted exactly the files you intended to, you may find the following useful.<br>
         First, once you've committed, run <code>git status</code>. You should see a message saying <code>nothing to commit, working tree clean</code>. If you have uncommitted changes, you'll see this instead: <code>Changes not staged for commit:</code>.
         <br>
         Second, after you've copied your git bundle to rice, and logged into rice:
@@ -85,13 +73,13 @@ Your style grade may also include components of functionality not covered by the
         <ol>
           <li>Install <code>gdb</code> (on the VM, <code>sudo apt-get install gdb</code>).</li>
           <li>Start <code>gdb</code> on the executable corresponding to the test you want to debug (from the <code>build</code> directory, <code>ls tests</code> to see the executables). e.g. from the build directory: <code>gdb tests/byte_stream_one_write</code>.</li>
-          <li>The output of the test failure will show you the part of the test that failed. To set a breakpoint at that part of the test, break on the line in the test file where the test harness for that part is created. The test files are in <code>sponge/tests</code> (not <code>sponge/build/tests</code>). e.g. if you're failing the <code>write-pop2-end</code> test in <code>byte_stream_one_write</code>, <code>break 83</code> (i.e. where the <code>write-pop2-end</code> test harness is created).</li>
+          <li>The output of the test failure will show you the part of the test that failed. To set a breakpoint at that part of the test, break on the line in the test file where the test harness for that part is created. The test source code is in <code>minnow/tests</code> (not <code>minnow/build/tests</code>). e.g. if you're failing the <code>write-pop2-end</code> test in <code>byte_stream_one_write</code>, <code>break 83</code> (i.e. where the <code>write-pop2-end</code> test harness is created).</li>
           <li>You can set breakpoints on your functions using the function names, as usual.</li>
         </ol>
 
         Other notes:
         <ul>
-          <li>We don't recommend modifying any files in the <code>libsponge/util</code> directory, since messing up the sponge library will make debugging difficult.</li>
+          <li>We don't recommend modifying any files in the <code>util</code> directory, since messing up the support library will make debugging difficult.</li>
           <li>If a test is timing out, but you want to check if it passes without the timeout, run the test executable individually, which won't enforce the timeout. e.g. from the build directory: <code>./tests/byte_stream_one_write</code>.</li>
           <li><code>gdb</code> may help debug timeouts. While running the test in <code>gdb</code>, if it appears to hang (meaning it may be executing a slow portion of code), ctrl-C and backtrace to pause and see which code was executing.</li>
         </ul></p>
@@ -99,14 +87,17 @@ Your style grade may also include components of functionality not covered by the
 
  <h4>Lab 0</h4>
       <ol>
-        <li><b>What should the behaviour of my program be if the caller tries to peek or pop with a <code>len</code> greater than what is available?</b></li>
-        We don't have any preference on the behavior if the caller tries to peek or pop more than is available in the stream, as long as you behave reasonably and don't crash in that situation. If you want to peek/pop the maximum available, that is fine with us. If you want to throw an exception (either for an overlength peek or an overlength pop), that is also fine with us.
+        <li><b>What should the behaviour of my program be if the caller tries to pop with a <code>len</code> greater than what is available?</b></li>
+        We don't have any preference on the behavior if the caller tries to pop more than is buffered in the stream, as long as you behave reasonably and don't crash in that situation. If you want to pop the maximum available, that is fine with us. If you want to throw an exception, that is also fine with us.
 
 	<li><b>How fast should my code be?</b></li>
 
 	  Here's a reasonable rule of thumb: if any of your tests are
 	  taking longer than 2 seconds, it's probably good to keep
 	exploring other ways of representing the ByteStream.
+	And if your benchmark results at the end of the test are worse
+	than 0.1 Gbit/s (100 million bits per second), that's another
+	sign the design may need to be rethought.
 	This lab doesn't require any sophisticated data structures,
 	but it might still take some trial-and-error to find a
 	reasonable approach. Sometimes "big-O" analysis can be
