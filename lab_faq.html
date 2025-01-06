@@ -44,8 +44,14 @@ to handle an unrecoverable error.
 Your style grade may also include components of functionality not covered by the tests.
 <p>
         <li><b>How do I run an individual test?</b></li>
-        <p><code>ctest -R '^test_name$'</code></p>
+<p>Set the environment variable TEST_ONLY to the exact name of the test. For example, if the desired test is named "write, close, read" then run the command
+  <p><code>export TEST_ONLY="write, close, read"</code><p>.
+	  Then run <code>cmake --build build --target test</code> as usual. Only the specified test will be run. You can restore the original behavior by running
+	  <code>unset TEST_ONLY</code>.
 
+	  <li><b>How can I print debug information and see it nicely alongside the test steps?</b></li>
+	  <p>Include the "debug.hh" header file, and use the <code>debug()</code> function. The function supports string interpolation. For example: <p><code>debug( "About to pop {} bytes", len );</code></p>
+	  
         <li><b>Can I add include lines in the header files?</b></li>
         <p>Sure, but please don't change the public interface of any
 	of the classes.</p>
@@ -72,7 +78,7 @@ Your style grade may also include components of functionality not covered by the
         </ol></p>
 
         <li><b>How do I debug?</b></li>
-        <p><code>gdb</code> is a great tool for debugging the labs! Check out the <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/resources/gdb">CS107 guide</a> if you need a refresher.<br>
+	<p>The above tips for running an individual test, and the <code>debug()</code> function, are both good places to start. Beyond that, <code>gdb</code> is a great tool for debugging the labs! Check out the <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/resources/gdb">CS107 guide</a> if you need a refresher.<br>
 
         To use <code>gdb</code> to debug a test:
         <ol>
